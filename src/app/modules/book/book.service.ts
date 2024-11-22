@@ -11,8 +11,13 @@ const getAllBookFromDB = () => {
   const result = BookModel.find();
   return result;
 };
-
+//Get single book form Db
+const getSingleBook = (id: string) => {
+  const result = BookModel.findById(id);
+  return result;
+};
 export const BookService = {
   createBookFromDB,
   getAllBookFromDB,
+  getSingleBook,
 };
