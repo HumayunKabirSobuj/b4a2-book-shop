@@ -11,13 +11,29 @@ const getAllBookFromDB = () => {
   const result = BookModel.find();
   return result;
 };
-//Get single book form Db
-const getSingleBook = (id: string) => {
+//Get single book form DD
+const getSingleBookFromDB = (id: string) => {
   const result = BookModel.findById(id);
   return result;
 };
+
+// Delete book from DB
+const deleteABookFromDB = (id: string) => {
+  const result = BookModel.findByIdAndDelete(id);
+  return result;
+};
+// Update a book from DB
+const updateABookFromDB = (id: string, data: BookInterface) => {
+  const result = BookModel.findByIdAndUpdate(id, data, {
+    new: true,
+  });
+  return result;
+};
+
 export const BookService = {
   createBookFromDB,
   getAllBookFromDB,
-  getSingleBook,
+  getSingleBookFromDB,
+  deleteABookFromDB,
+  updateABookFromDB,
 };

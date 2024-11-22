@@ -41,7 +41,7 @@ const getAllBook = async (req: Request, res: Response) => {
 const getSingleBook = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const result = await BookService.getSingleBook(id);
+    const result = await BookService.getSingleBookFromDB(id);
     res.status(200).json({
       success: true,
       message: 'Book retrieved successfully',
@@ -55,9 +55,48 @@ const getSingleBook = async (req: Request, res: Response) => {
     });
   }
 };
+//Delete a book from DB
+const deleteABook = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const result = await BookService.deleteABookFromDB(id);
+    res.status(200).json({
+      success: true,
+      message: 'Book deleted successfully',
+      data: {},
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Book cannot deleted',
+      error,
+    });
+  }
+};
+//Update a book from DB
+const updateABook = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const { book: bookData } = req.body;
+    const result = await BookService.updateABookFromDB(id, bookData);
+    res.status(200).json({
+      success: true,
+      message: 'Book updated successfully',
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Book cannot updated',
+      error,
+    });
+  }
+};
 
 export const BookController = {
   createBook,
   getAllBook,
   getSingleBook,
+  deleteABook,
+  updateABook,
 };
