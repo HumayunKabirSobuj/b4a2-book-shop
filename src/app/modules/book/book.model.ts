@@ -58,5 +58,5 @@ const bookSchema = new Schema(
     timestamps: true,
   },
 );
-
+// create a model
 export const BookModel = model<BookInterface>('book', bookSchema);
