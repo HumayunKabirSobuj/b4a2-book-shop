@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import BookRouter from './app/modules/book/book.route';
 import orderRouter from './app/modules/order/order.route';
@@ -16,5 +16,33 @@ app.get('/', (req: Request, res: Response) => {
     message: 'Book-Shop Server Is Running ',
   });
 });
+
+//custom error handler
+
+app.all('*', (req: Request, res: Response) => {
+  res.status(400).json({
+    success: false,
+    message: 'Something went wrong',
+  });
+});
+
+//global error handler
+
+interface ErrorWithStatus extends Error {
+  status?: number;
+}
+
+app.use(
+  (error: ErrorWithStatus, req: Request, res: Response, next: NextFunction) => {
+    if (error) {
+      res.status(400).json({
+        success: false,
+        message:'Something went wrong',
+      });
+    } else {
+      next();
+    }
+  },
+);
 
 export default app;
