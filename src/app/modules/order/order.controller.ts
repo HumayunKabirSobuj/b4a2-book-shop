@@ -19,7 +19,7 @@ const orderABook = async (req: Request, res: Response) => {
     }
 
     if (data.quantity > findBook.quantity) {
-      res.status(400).json({
+      res.status(404).json({
         success: false,
         message: 'Insufficient stock',
         error: 'Validation Error',
