@@ -30,7 +30,7 @@ const getAllBook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: 'Books cannot retrieved',
       error,
@@ -49,7 +49,7 @@ const getSingleBook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: 'Book cannot retrieved',
       error,
