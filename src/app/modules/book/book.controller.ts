@@ -61,7 +61,7 @@ const getSingleBook = async (req: Request, res: Response) => {
 const deleteABook = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const result = await BookService.deleteABookFromDB(id);
+    await BookService.deleteABookFromDB(id);
     res.status(200).json({
       success: true,
       message: 'Book deleted successfully',
