@@ -109,7 +109,8 @@ npm run start:dev
 - Place an Order <br>
   Endpoint: /api/orders <br>
   Method: POST <br>
-  Request Body: <br> <br>
+  Request Body: <br><br>
+  example :
 
 ```
 {
