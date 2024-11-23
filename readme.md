@@ -67,6 +67,7 @@ npm run start:dev
   Endpoint: /api/products <br>
   Method: POST <br>
   Request Body: <br> <br>
+  example :
 
 ```
 {
@@ -92,6 +93,7 @@ npm run start:dev
   Endpoint: /api/products/:id <br>
   Method: PUT <br>
   Request Body: Include only fields to update, e.g.: <br> <br>
+  example :
 
 ```
 {
@@ -115,7 +117,7 @@ npm run start:dev
 ```
 {
   "email": "customer@example.com",
-  "product": "648a45e5f0123c45678d9012",
+  "product": "648a45e5f0123c45678d9012", This is Demo id . Enter here any product id from book collection.
   "quantity": 2,
   "totalPrice": 30
 }
