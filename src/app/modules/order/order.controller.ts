@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import { BookModel } from '../book/book.model';
 import { orderService } from './order.service';
+import { orderModel } from './order.model';
 
 const orderABook = async (req: Request, res: Response) => {
   try {
     const data = req.body.order;
-    const { email, product, quantity ,totalPrice} = data;
+    const { email, product, quantity, totalPrice } = data;
     const findBook = await BookModel.findById(data.product);
 
     if (!findBook) {
@@ -38,15 +39,17 @@ const orderABook = async (req: Request, res: Response) => {
     });
 
     // console.log(findBook)
-    const updateQueantity= findBook.quantity-quantity;
+    const updateQueantity = findBook.quantity - quantity;
     // console.log(updateQueantity)
     const updateQuantityData = {
-      quantity:updateQueantity
-    }
+      quantity: updateQueantity,
+    };
     // console.log(updateQuantityData)
 
-    const updateBookData = await BookModel.findByIdAndUpdate(product,updateQuantityData)
-
+    const updateBookData = await BookModel.findByIdAndUpdate(
+      product,
+      updateQuantityData,
+    );
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -56,6 +59,36 @@ const orderABook = async (req: Request, res: Response) => {
   }
 };
 
+const getRevenue = async (req: Request, res: Response) => {
+  try {
+    const Revenue = await orderModel.aggregate([
+      // group stage
+      {
+        $group: {
+          _id: null,
+          totalSelary: { $sum: '$totalPrice' },
+        },
+      },
+      { $project: { totalSelary: 1 } },
+    ]);
+    // console.log(Revenue[0].totalSelary);
+    res.status(200).json({
+      success: true,
+      message: 'Revenue calculated successfully',
+      data: {
+        totalSelary: Revenue[0].totalSelary,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Revenue cannot calculated',
+      error,
+    });
+  }
+};
+
 export const orderController = {
   orderABook,
+  getRevenue,
 };

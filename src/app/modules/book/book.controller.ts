@@ -37,6 +37,7 @@ const getAllBook = async (req: Request, res: Response) => {
     });
   }
 };
+
 //Get single book from DB
 const getSingleBook = async (req: Request, res: Response) => {
   try {
@@ -55,6 +56,7 @@ const getSingleBook = async (req: Request, res: Response) => {
     });
   }
 };
+
 //Delete a book from DB
 const deleteABook = async (req: Request, res: Response) => {
   try {
@@ -73,6 +75,7 @@ const deleteABook = async (req: Request, res: Response) => {
     });
   }
 };
+
 //Update a book from DB
 const updateABook = async (req: Request, res: Response) => {
   try {
