@@ -12,7 +12,7 @@ const createBook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: 'Book Cannot Create',
       error,
@@ -68,7 +68,7 @@ const deleteABook = async (req: Request, res: Response) => {
       data: {},
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: 'Book cannot deleted',
       error,
@@ -88,7 +88,7 @@ const updateABook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: 'Book cannot updated',
       error,

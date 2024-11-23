@@ -49,7 +49,7 @@ const orderABook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: 'Order cannot created',
       error,
@@ -79,7 +79,7 @@ const getRevenue = async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: 'Revenue cannot calculated',
       error,
