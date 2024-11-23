@@ -3,6 +3,7 @@ import { BookModel } from '../book/book.model';
 import { orderService } from './order.service';
 import { orderModel } from './order.model';
 
+//Oder A book
 const orderABook = async (req: Request, res: Response) => {
   try {
     const data = req.body.order;
@@ -10,18 +11,20 @@ const orderABook = async (req: Request, res: Response) => {
     const findBook = await BookModel.findById(data.product);
 
     if (!findBook) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         message: 'Book Not Found',
       });
+      return;
     }
 
     if (data.quantity > findBook.quantity) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         message: 'Insufficient stock',
         error: 'Validation Error',
       });
+      return;
     }
     // const totalPrice = findBook.price * data.quantity;
     const order = {
@@ -32,12 +35,6 @@ const orderABook = async (req: Request, res: Response) => {
     };
 
     const result = await orderService.orderABookAddFromDB(order);
-    res.status(200).json({
-      success: true,
-      message: 'Order created successfully',
-      data: result,
-    });
-
     // console.log(findBook)
     const updateQueantity = findBook.quantity - quantity;
     // console.log(updateQueantity)
@@ -46,19 +43,22 @@ const orderABook = async (req: Request, res: Response) => {
     };
     // console.log(updateQuantityData)
 
-    const updateBookData = await BookModel.findByIdAndUpdate(
-      product,
-      updateQuantityData,
-    );
+    await BookModel.findByIdAndUpdate(product, updateQuantityData);
+    res.status(200).json({
+      success: true,
+      message: 'Order created successfully',
+      data: result,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Something went wrong',
+      message: 'Order cannot created',
       error,
     });
   }
 };
 
+//Revenue Calculation
 const getRevenue = async (req: Request, res: Response) => {
   try {
     const Revenue = await orderModel.aggregate([
