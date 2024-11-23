@@ -42,7 +42,6 @@ const orderABook = async (req: Request, res: Response) => {
       quantity: updateQueantity,
     };
     // console.log(updateQuantityData)
-
     await BookModel.findByIdAndUpdate(product, updateQuantityData);
     res.status(200).json({
       success: true,
