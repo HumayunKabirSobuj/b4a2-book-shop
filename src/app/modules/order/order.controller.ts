@@ -6,7 +6,7 @@ import { orderModel } from './order.model';
 //Oder A book
 const orderABook = async (req: Request, res: Response) => {
   try {
-    const data = req.body.order;
+    const data = req.body;
     const { email, product, quantity, totalPrice } = data;
     const findBook = await BookModel.findById(data.product);
 

@@ -4,7 +4,7 @@ import { BookService } from './book.service';
 // Create Book From DB
 const createBook = async (req: Request, res: Response) => {
   try {
-    const { book: bookData } = req.body;
+    const bookData = req.body;
     const result = await BookService.createBookFromDB(bookData);
     res.status(200).json({
       success: true,
@@ -80,7 +80,7 @@ const deleteABook = async (req: Request, res: Response) => {
 const updateABook = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const { book: bookData } = req.body;
+    const bookData = req.body;
     const result = await BookService.updateABookFromDB(id, bookData);
     res.status(200).json({
       success: true,
