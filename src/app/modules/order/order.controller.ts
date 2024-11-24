@@ -75,7 +75,7 @@ const getRevenue = async (req: Request, res: Response) => {
       success: true,
       message: 'Revenue calculated successfully',
       data: {
-        totalSelary: Revenue[0].totalSelary,
+        totalRevenue: Revenue[0].totalSelary,
       },
     });
   } catch (error) {
