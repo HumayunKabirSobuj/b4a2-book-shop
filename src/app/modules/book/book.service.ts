@@ -7,8 +7,19 @@ const createBookFromDB = (data: BookInterface) => {
   return result;
 };
 //Get all book from DB
-const getAllBookFromDB = () => {
-  const result = BookModel.find();
+const getAllBookFromDB = (queryData: string) => {
+  // console.log(queryData)
+  const query = queryData
+    ? {
+        $or: [
+          { category: queryData },
+          { title: queryData },
+          { author: queryData },
+        ],
+      }
+    : {};
+
+  const result = BookModel.find(query);
   return result;
 };
 //Get single book form DD

@@ -23,7 +23,8 @@ const createBook = async (req: Request, res: Response) => {
 // Get All Book From DB
 const getAllBook = async (req: Request, res: Response) => {
   try {
-    const result = await BookService.getAllBookFromDB();
+    const queryData = req.query.searchTerm;
+    const result = await BookService.getAllBookFromDB(queryData as string);
     res.status(200).json({
       success: true,
       message: 'Books retrieved successfully',
@@ -56,6 +57,8 @@ const getSingleBook = async (req: Request, res: Response) => {
     });
   }
 };
+
+
 
 //Delete a book from DB
 const deleteABook = async (req: Request, res: Response) => {
